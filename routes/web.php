@@ -20,6 +20,10 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::post('/follow/{user}',function(){
+    return ['success'];
+});
+
 Route::get('/p/create',[PostController::class,'create']);
 Route::post('/p',[PostController::class,'store']);
 Route::get('/profile/{user}', [ProfileController::class, 'index'])->name('profile.index');

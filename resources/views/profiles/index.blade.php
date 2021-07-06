@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
     <div class="row">
         <div class="col-3 p-5">
@@ -8,7 +9,11 @@
         </div>
         <div class="col-9 p-5">
             <div class="d-flex justify-content-between align-items-baseline "> {{-- //we have given the class at the time of Add a post. --}} 
-                <h1>{{$user->username}} </h1>
+                <div class='d-flex align-items-center pb-3'>
+                    <div class="h4">{{$user->username}} </div>
+                    <div id="followButton" user-id="{{ $user->id }}"></div>
+                </div>
+                
                 @can('update', $user->profile)
                 <a href="/p/create">Add New Post</a>
                 @endcan
@@ -40,4 +45,6 @@
         
     </div>
 </div>
+
+
 @endsection
