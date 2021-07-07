@@ -44,16 +44,22 @@ class User extends Authenticatable
     protected static function boot()
     {
         parent::boot();
-        static::created(function($user){
+        static::created(function ($user) {
             $user->profile()->create([
-                'title'=>$user->username,
+                'title' => $user->username,
             ]);
         });
     }
-    public function profile(){
+    public function profile()
+    {
         return $this->hasOne(Profile::class);
     }
-    public function posts(){
-        return $this->hasMany(Post::class)->orderBy('created_at','DESC'); //Order by will help to change the order.
+    public function posts()
+    {
+        return $this->hasMany(Post::class)->orderBy('created_at', 'DESC'); //Order by will help to change the order.
+    }
+    public function following()
+    {
+        return $this->belongsToMany(Profile::class);
     }
 }

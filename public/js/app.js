@@ -1922,16 +1922,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var followUser = function followUser() {
-  return axios__WEBPACK_IMPORTED_MODULE_0___default().post('/follow/1').then(function ($response) {
+var followUser = function followUser(user_id) {
+  return axios__WEBPACK_IMPORTED_MODULE_0___default().post("/follow/".concat(user_id)).then(function ($response) {
     alert($response.data);
   });
 };
 
-function FollowButton() {
+function FollowButton(props) {
+  var user_id = props.user_id;
+  console.log([user_id]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-    "class": "btn btn-primary ml-4",
-    onClick: followUser,
+    className: "btn btn-primary ml-4",
+    onClick: function onClick() {
+      return followUser(user_id);
+    },
     children: "Follow"
   });
 }
@@ -1939,7 +1943,10 @@ function FollowButton() {
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FollowButton);
 
 if (document.getElementById('followButton')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(FollowButton, {}), document.getElementById('followButton'));
+  var user_id = document.getElementById('followButton').getAttribute('user_id');
+  react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(FollowButton, {
+    user_id: user_id
+  }), document.getElementById('followButton'));
 }
 
 /***/ }),

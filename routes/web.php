@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\FollowsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,9 +21,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::post('/follow/{user}',function(){
-    return ['success'];
-});
+Route::post('/follow/{user}',[FollowsController::class,'store']);
 
 Route::get('/p/create',[PostController::class,'create']);
 Route::post('/p',[PostController::class,'store']);
