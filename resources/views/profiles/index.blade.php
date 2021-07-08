@@ -11,7 +11,7 @@
             <div class="d-flex justify-content-between align-items-baseline "> {{-- //we have given the class at the time of Add a post. --}} 
                 <div class='d-flex align-items-center pb-3'>
                     <div class="h4">{{$user->username}} </div>
-                    <div id="followButton" user_id="{{ $user->id }}"></div>
+                    <div id="followButton" user_id="{{ $user->id }}" follows="{{ $follows }}"></div>
                 </div>
                 
                 @can('update', $user->profile)
