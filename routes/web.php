@@ -16,16 +16,14 @@ use App\Http\Controllers\FollowsController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PostController::class, 'index']);
 
 Auth::routes();
-Route::post('/follow/{user}',[FollowsController::class,'store']);
+Route::post('/follow/{user}', [FollowsController::class, 'store']);
 
-Route::get('/p/create',[PostController::class,'create']);
-Route::post('/p',[PostController::class,'store']);
+Route::get('/p/create', [PostController::class, 'create']);
+Route::post('/p', [PostController::class, 'store']);
 Route::get('/profile/{user}', [ProfileController::class, 'index'])->name('profile.index');
-Route::get('/p/{post}',[PostController::class,'show']);
+Route::get('/p/{post}', [PostController::class, 'show']);
 Route::get('profile/{user}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::patch('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');
