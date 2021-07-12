@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 use SebastianBergmann\Environment\Console;
 
 class ProfileController extends Controller
@@ -12,9 +13,17 @@ class ProfileController extends Controller
     public function index(User $user)
     {
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
-
+        $postCount= Cache::remember('posts.count.'.$user->id,now()->addSeconds(30),function()use($user){
+            return $user->posts->count();
+        }); 
+        $follwersCount=Cache::remember('followers.count.'.$user->id,now()->addSeconds(30),function() use($user){
+            return  $user->profile->Follwers->count();
+        });
+        $followingCount=Cache::remember('following.count.'.$user->id,now()->addSeconds(30),function() use($user){
+            return $user->following->count();
+        }); 
         //    $user=User::findOrFail($user);
-        return view('profiles.index', compact('user', 'follows'));
+        return view('profiles.index', compact('user', 'follows','postCount','follwersCount','followingCount'));
     }
     public function edit(User $user)
     {

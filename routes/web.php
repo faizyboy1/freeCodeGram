@@ -16,11 +16,11 @@ use App\Http\Controllers\FollowsController;
 |
 */
 
-Route::get('/', [PostController::class, 'index']);
+
 
 Auth::routes();
 Route::post('/follow/{user}', [FollowsController::class, 'store']);
-
+Route::get('/', [PostController::class, 'index']);
 Route::get('/p/create', [PostController::class, 'create']);
 Route::post('/p', [PostController::class, 'store']);
 Route::get('/profile/{user}', [ProfileController::class, 'index'])->name('profile.index');
