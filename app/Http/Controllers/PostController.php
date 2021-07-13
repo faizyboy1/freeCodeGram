@@ -18,7 +18,8 @@ class PostController extends Controller
     public function index()
     {
         $users = auth()->user()->following()->pluck('profiles.user_id');
-        dd($users);
+        $posts=Post::whereIn('user_id',$users)->with('user')->latest()->paginate(2);
+        return view('posts.index',compact('posts'));
     }
     public function create()
     {
